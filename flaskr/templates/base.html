@@ -1,0 +1,29 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - Flaskr</title>
+<!--sets a title, block is for a placeholder so it can change-->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
+
+<!--links to css, same syntax of url_for('static'), filename... for anything else -->
+<nav>   <!--nav bar -->
+  <h1><a href="{{ url_for('index') }}" style="text-decoration: none">Read-It</a></h1>
+  <ul>      <!--unordered list, g.user can be accessed in all templates to check if logged in-->
+    {% if g.user %}
+      <li><span>{{ g.user['username'] }}</span>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+    {% else %}
+      <li><a href="{{ url_for('auth.register') }}">Register</a>
+      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+    {% endif %}
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+    
+  </header>
+  {% for message in get_flashed_messages() %}       <!--cycles through any messages-->
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>

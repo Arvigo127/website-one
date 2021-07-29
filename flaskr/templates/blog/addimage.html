@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Add Image{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="Link">Link</label>
+    <input name="Link" id="Link" value="{{ request.form['Link'] }}" required>
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}
+
+
